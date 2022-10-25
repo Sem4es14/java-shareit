@@ -1,12 +1,15 @@
-package ru.practicum.shareit.item.model;
+package ru.practicum.shareit.item.dto.ResponseDto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Item {
+public class ItemResponse {
     private Long id;
     private String name;
     private String description;
