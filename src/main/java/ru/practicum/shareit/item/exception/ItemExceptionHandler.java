@@ -29,11 +29,4 @@ public class ItemExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
-
-    @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<ExceptionDTO> runtimeException(RuntimeException e) {
-        return new ResponseEntity<>(new ExceptionDTO(e.getMessage(), LocalDateTime.now()),
-                HttpStatus.INTERNAL_SERVER_ERROR
-        );
-    }
 }
