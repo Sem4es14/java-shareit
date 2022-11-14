@@ -52,6 +52,6 @@ public class ItemExceptionHandler {
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<ExceptionDTO> runtimeException(RuntimeException e) {
         return new ResponseEntity<>(new ExceptionDTO(e.getMessage(), LocalDateTime.now()),
-                HttpStatus.CONFLICT);
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
