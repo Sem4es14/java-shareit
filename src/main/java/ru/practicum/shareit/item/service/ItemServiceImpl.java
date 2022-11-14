@@ -2,15 +2,14 @@ package ru.practicum.shareit.item.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.practicum.shareit.exception.model.ForbiddenException;
+import ru.practicum.shareit.exception.model.NotFoundException;
 import ru.practicum.shareit.item.dto.ResponseDto.ItemResponse;
 import ru.practicum.shareit.item.dto.requestDto.ItemCreateRequest;
 import ru.practicum.shareit.item.dto.requestDto.ItemUpdateRequest;
-import ru.practicum.shareit.item.exception.AccessToItemForbidden;
-import ru.practicum.shareit.item.exception.ItemNotFound;
 import ru.practicum.shareit.item.mapper.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemRepository;
-import ru.practicum.shareit.user.exception.UserNotFound;
 import ru.practicum.shareit.user.repository.UserRepository;
 
 import java.util.Collections;
@@ -25,7 +24,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemResponse create(ItemCreateRequest request, Long ownerId) {
         if (userRepository.findById(ownerId).isEmpty()) {
-            throw new UserNotFound("User with id: " + ownerId + " is not found.");
+            throw new NotFoundException("User with id: " + ownerId + " is not found.");
         }
         Item item = Item.builder()
                 .name(request.getName())
@@ -41,10 +40,10 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemResponse update(ItemUpdateRequest request, Long itemId, Long ownerId) {
         Item item = itemRepository.findById(itemId).orElseThrow(() -> {
-            throw new ItemNotFound("Item with id: " + itemId + " is not found.");
+            throw new NotFoundException("Item with id: " + itemId + " is not found.");
         });
         if (!item.getOwner().equals(ownerId)) {
-            throw new AccessToItemForbidden("Access to item with id: " + itemId + " is forbidden");
+            throw new ForbiddenException("Access to item with id: " + itemId + " is forbidden");
         }
         item.setName(request.getName() == null ? item.getName() : request.getName());
         item.setDescription(request.getDescription() == null ? item.getDescription() : request.getDescription());
@@ -61,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemResponse getById(Long id) {
         Item item = itemRepository.findById(id).orElseThrow(() -> {
-            throw new ItemNotFound("Item with id: " + id + " is not found.");
+            throw new NotFoundException("Item with id: " + id + " is not found.");
         });
 
         return ItemMapper.fromItemToResponse(item);
