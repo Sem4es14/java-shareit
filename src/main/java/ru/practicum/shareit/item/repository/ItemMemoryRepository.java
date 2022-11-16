@@ -27,7 +27,7 @@ public class ItemMemoryRepository implements ItemRepository {
     @Override
     public List<Item> findByOwner(Long ownerId) {
         return items.values().stream()
-                .filter(item -> item.getOwner().equals(ownerId))
+                .filter(item -> item.getOwner().getId().equals(ownerId))
                 .collect(Collectors.toList());
     }
 
