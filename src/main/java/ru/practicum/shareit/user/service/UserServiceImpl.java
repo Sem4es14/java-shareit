@@ -9,21 +9,21 @@ import ru.practicum.shareit.user.dto.requestDto.UserUpdateRequest;
 import ru.practicum.shareit.user.dto.responseDto.UserResponse;
 import ru.practicum.shareit.user.mapper.UserMapper;
 import ru.practicum.shareit.user.model.User;
-import ru.practicum.shareit.user.repository.UserRepository;
+import ru.practicum.shareit.user.repository.UserDbRepository;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+    private final UserDbRepository userRepository;
 
     @Override
     public UserResponse create(UserCreateRequest request) {
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+       /* if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new AlreadyExistsException("User with email: " + request.getEmail() + " is already exists");
         }
-
+*/
         User user = User.builder()
                 .email(request.getEmail())
                 .name(request.getName())
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(request.getEmail() == null ? user.getEmail() : request.getEmail());
         user.setName(request.getName() == null ? user.getName() : request.getName());
 
-        return UserMapper.fromUserToResponse(user);
+        return UserMapper.fromUserToResponse(userRepository.save(user));
     }
 
     @Override
@@ -57,14 +57,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserResponse> getAll() {
-        return UserMapper.fromUsersToResponses(userRepository.getAll());
+        return UserMapper.fromUsersToResponses(userRepository.findAll());
     }
 
     @Override
     public void delete(Long id) {
-        userRepository.findById(id).orElseThrow(() -> {
+        User user = userRepository.findById(id).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + id + " is not found");
         });
-        userRepository.delete(id);
+        userRepository.delete(user);
     }
 }

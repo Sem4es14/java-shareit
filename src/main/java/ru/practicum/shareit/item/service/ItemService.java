@@ -11,7 +11,7 @@ public interface ItemService {
 
     ItemResponse update(ItemUpdateRequest request, Long itemId, Long ownerId);
 
-    ItemResponse getById(Long id);
+    ItemResponse getById(Long id, Long userId);
 
     List<ItemResponse> getByOwner(Long ownerId);
 
