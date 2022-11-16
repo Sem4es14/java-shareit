@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.requestDto.BookingCreateRequest;
-import ru.practicum.shareit.booking.dto.requestDto.BookingUpdateRequest;
 import ru.practicum.shareit.booking.dto.responseDto.BookingResponse;
 import ru.practicum.shareit.booking.model.BookingState;
 import ru.practicum.shareit.booking.service.BookingService;
@@ -13,9 +12,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * TODO Sprint add-bookings.
- */
 @RestController
 @RequestMapping(path = "/bookings")
 @AllArgsConstructor

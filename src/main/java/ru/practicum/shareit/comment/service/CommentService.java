@@ -9,7 +9,6 @@ import ru.practicum.shareit.comment.dto.responseDto.CommentResponse;
 import ru.practicum.shareit.comment.mapper.CommentMapper;
 import ru.practicum.shareit.comment.model.Comment;
 import ru.practicum.shareit.comment.repository.CommentRepository;
-import ru.practicum.shareit.exception.model.ForbiddenException;
 import ru.practicum.shareit.exception.model.NotFoundException;
 import ru.practicum.shareit.exception.model.ValidationException;
 import ru.practicum.shareit.item.model.Item;
