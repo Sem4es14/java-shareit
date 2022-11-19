@@ -81,4 +81,8 @@ public interface BookingDbRepository extends JpaRepository<Booking, Long> {
 
     Optional<Booking> findByItemAndEndBefore(Item item, LocalDateTime dateTime);
 
+    List<Booking> findByItemOwnerAndEndBefore(User owner, LocalDateTime dateTime);
+
+    List<Booking> findByItemOwnerAndStartAfter(User owner, LocalDateTime dateTime);
+
 }

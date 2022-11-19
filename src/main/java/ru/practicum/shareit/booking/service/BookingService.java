@@ -56,7 +56,7 @@ public class BookingService {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> {
             throw new NotFoundException("Booking with id: " + bookingId + " is not found.");
         });
-        User owner = userRepository.findById(ownerId).orElseThrow(() -> {
+        userRepository.findById(ownerId).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + ownerId + " is not found.");
         });
         if (!booking.getItem().getOwner().getId().equals(ownerId)) {

@@ -20,10 +20,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse create(UserCreateRequest request) {
-       /* if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new AlreadyExistsException("User with email: " + request.getEmail() + " is already exists");
-        }
-*/
         User user = User.builder()
                 .email(request.getEmail())
                 .name(request.getName())

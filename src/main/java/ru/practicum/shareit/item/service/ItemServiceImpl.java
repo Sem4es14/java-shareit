@@ -3,12 +3,13 @@ package ru.practicum.shareit.item.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.mapper.BookingMapper;
+import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingDbRepository;
 import ru.practicum.shareit.comment.mapper.CommentMapper;
 import ru.practicum.shareit.comment.repository.CommentRepository;
 import ru.practicum.shareit.exception.model.ForbiddenException;
 import ru.practicum.shareit.exception.model.NotFoundException;
-import ru.practicum.shareit.item.dto.ResponseDto.ItemResponse;
+import ru.practicum.shareit.item.dto.responseDto.ItemResponse;
 import ru.practicum.shareit.item.dto.requestDto.ItemCreateRequest;
 import ru.practicum.shareit.item.dto.requestDto.ItemUpdateRequest;
 import ru.practicum.shareit.item.mapper.ItemMapper;
@@ -67,15 +68,16 @@ public class ItemServiceImpl implements ItemService {
         User owner = userRepository.findById(ownerId).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + ownerId + " is not found.");
         });
-        List<Item> items = itemRepository.findByOwner(owner);
         List<ItemResponse> responses = new ArrayList<>();
-        for (Item item : items) {
+        List<Booking> bookingsLast = bookingRepository.findByItemOwnerAndEndBefore(owner, LocalDateTime.now());
+        List<Booking> bookingsNext = bookingRepository.findByItemOwnerAndStartAfter(owner, LocalDateTime.now());
+        for (Item item : itemRepository.findByOwner(owner)) {
             ItemResponse itemResponse = ItemMapper.fromItemToResponse(item);
             itemResponse.setLastBooking(BookingMapper.fromBookingToShortResponse(
-                    bookingRepository.findByItemAndEndBefore(item, LocalDateTime.now()).orElse(null)
+                    bookingsLast.stream().filter(booking -> booking.getItem().equals(item)).findFirst().orElse(null)
             ));
             itemResponse.setNextBooking(BookingMapper.fromBookingToShortResponse(
-                    bookingRepository.findByItemAndStartAfter(item, LocalDateTime.now()).orElse(null)
+                    bookingsNext.stream().filter(booking -> booking.getItem().equals(item)).findFirst().orElse(null)
             ));
             itemResponse.setComments(CommentMapper.fromCommentsToResponses(commentRepository.findByItem(item)));
             responses.add(itemResponse);

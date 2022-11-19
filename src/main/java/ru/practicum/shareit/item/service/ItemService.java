@@ -1,6 +1,6 @@
 package ru.practicum.shareit.item.service;
 
-import ru.practicum.shareit.item.dto.ResponseDto.ItemResponse;
+import ru.practicum.shareit.item.dto.responseDto.ItemResponse;
 import ru.practicum.shareit.item.dto.requestDto.ItemCreateRequest;
 import ru.practicum.shareit.item.dto.requestDto.ItemUpdateRequest;
 
