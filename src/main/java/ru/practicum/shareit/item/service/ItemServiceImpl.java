@@ -12,9 +12,9 @@ import ru.practicum.shareit.comment.model.Comment;
 import ru.practicum.shareit.comment.repository.CommentRepository;
 import ru.practicum.shareit.exception.model.ForbiddenException;
 import ru.practicum.shareit.exception.model.NotFoundException;
-import ru.practicum.shareit.item.dto.responseDto.ItemResponse;
 import ru.practicum.shareit.item.dto.requestDto.ItemCreateRequest;
 import ru.practicum.shareit.item.dto.requestDto.ItemUpdateRequest;
+import ru.practicum.shareit.item.dto.responseDto.ItemResponse;
 import ru.practicum.shareit.item.mapper.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.repository.ItemDbRepository;
@@ -76,7 +76,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemResponse> getByOwner(Long ownerId, Long from, Integer size) {
-        Pageable pageable = PageRequest.of((int) (from/size), size);
+        Pageable pageable = PageRequest.of((int) (from / size), size);
         User owner = userRepository.findById(ownerId).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + ownerId + " is not found.");
         });
@@ -116,13 +116,13 @@ public class ItemServiceImpl implements ItemService {
             ));
         }
         itemResponse.setComments(CommentMapper.fromCommentsToResponses(commentRepository.findByItem(item)));
-;
+        ;
         return itemResponse;
     }
 
     @Override
     public List<ItemResponse> getBySearch(String search, Long from, Integer size) {
-        Pageable pageable = PageRequest.of((int) (from/size), size);
+        Pageable pageable = PageRequest.of((int) (from / size), size);
         if (search.isEmpty()) {
             return Collections.emptyList();
         }

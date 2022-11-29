@@ -3,7 +3,6 @@ package ru.practicum.shareit.booking.service;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.booking.dto.requestDto.BookingCreateRequest;
 import ru.practicum.shareit.booking.dto.responseDto.BookingResponse;
@@ -85,7 +84,7 @@ public class BookingService {
     }
 
     public List<BookingResponse> getBookingsByBooker(Long bookerId, BookingState state, Long from, Integer size) {
-        Pageable pageable = PageRequest.of((int) (from/size), size);
+        Pageable pageable = PageRequest.of((int) (from / size), size);
         User booker = userRepository.findById(bookerId).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + bookerId + " is not found.");
         });
@@ -124,7 +123,7 @@ public class BookingService {
         User owner = userRepository.findById(ownerId).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + ownerId + " is not found.");
         });
-        Pageable pageable = PageRequest.of((int) (from/size), size);
+        Pageable pageable = PageRequest.of((int) (from / size), size);
 
         switch (state) {
             case ALL: {

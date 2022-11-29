@@ -14,7 +14,6 @@ import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.request.repository.ItemRequestRepository;
 import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.repository.UserDbRepository;
-import ru.practicum.shareit.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -52,7 +51,7 @@ public class ItemRequestService {
         User requester = userRepository.findById(requesterId).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + requesterId + " is not found.");
         });
-        Pageable pageable = PageRequest.of((int) (from/size), size, Sort.by("created").descending());
+        Pageable pageable = PageRequest.of((int) (from / size), size, Sort.by("created").descending());
 
         return ItemRequestMapper.fromRequestsToResponses(requestRepository.findAllByRequesterNot(pageable, requester).getContent());
     }
