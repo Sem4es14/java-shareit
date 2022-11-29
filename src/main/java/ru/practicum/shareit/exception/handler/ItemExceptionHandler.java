@@ -6,10 +6,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import ru.practicum.shareit.exception.dto.ExceptionDTO;
 import ru.practicum.shareit.exception.model.AlreadyExistsException;
 import ru.practicum.shareit.exception.model.ForbiddenException;
 import ru.practicum.shareit.exception.model.NotFoundException;
+import ru.practicum.shareit.exception.model.ValidationException;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -49,9 +51,17 @@ public class ItemExceptionHandler {
         );
     }
 
-    @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<ExceptionDTO> runtimeException(RuntimeException e) {
+    @ExceptionHandler(value = ValidationException.class)
+    public ResponseEntity<ExceptionDTO> validationException(ValidationException e) {
         return new ResponseEntity<>(new ExceptionDTO(e.getMessage(), LocalDateTime.now()),
-                HttpStatus.INTERNAL_SERVER_ERROR);
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ExceptionDTO> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
+        return new ResponseEntity<>(new ExceptionDTO("Unknown state: UNSUPPORTED_STATUS", LocalDateTime.now()),
+                HttpStatus.BAD_REQUEST
+        );
     }
 }

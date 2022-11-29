@@ -1,6 +1,6 @@
 package ru.practicum.shareit.item.mapper;
 
-import ru.practicum.shareit.item.dto.ResponseDto.ItemResponse;
+import ru.practicum.shareit.item.dto.responseDto.ItemResponse;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
