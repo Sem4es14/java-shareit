@@ -2,6 +2,7 @@ package ru.practicum.shareit.item.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.comment.dto.requestDto.CommentCreateRequest;
 import ru.practicum.shareit.comment.dto.responseDto.CommentResponse;
@@ -12,12 +13,15 @@ import ru.practicum.shareit.item.dto.requestDto.ItemUpdateRequest;
 import ru.practicum.shareit.item.service.ItemService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/items")
 @AllArgsConstructor
+@Validated
 public class ItemController {
     private final ItemService itemService;
     private final CommentService commentService;
@@ -36,8 +40,10 @@ public class ItemController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ItemResponse>> getByOwner(@RequestHeader("X-Sharer-User-Id") Long ownerId) {
-        return ResponseEntity.of(Optional.of(itemService.getByOwner(ownerId)));
+    public ResponseEntity<List<ItemResponse>> getByOwner(@RequestParam(defaultValue = "0") @Min(value = 0) Long from,
+                                                         @RequestParam(defaultValue = "10") @Positive Integer size,
+                                                         @RequestHeader("X-Sharer-User-Id") Long ownerId) {
+        return ResponseEntity.of(Optional.of(itemService.getByOwner(ownerId, from, size)));
     }
 
     @GetMapping("/{itemId}")
@@ -47,8 +53,10 @@ public class ItemController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ItemResponse>> getBySearch(@RequestParam(value = "text") String searchBy) {
-        return ResponseEntity.of(Optional.of(itemService.getBySearch(searchBy)));
+    public ResponseEntity<List<ItemResponse>> getBySearch(@RequestParam(defaultValue = "0") @Min(value = 0) Long from,
+                                                          @RequestParam(defaultValue = "10") @Positive Integer size,
+                                                          @RequestParam(value = "text") String searchBy) {
+        return ResponseEntity.of(Optional.of(itemService.getBySearch(searchBy, from, size)));
     }
 
     @PostMapping("/{itemId}/comment")

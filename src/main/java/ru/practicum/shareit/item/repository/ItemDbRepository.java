@@ -1,5 +1,7 @@
 package ru.practicum.shareit.item.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.model.User;
@@ -7,8 +9,10 @@ import ru.practicum.shareit.user.model.User;
 import java.util.List;
 
 public interface ItemDbRepository extends JpaRepository<Item, Long> {
-    List<Item> findByOwner(User owner);
+    Page<Item> findByOwner(User owner, Pageable pageable);
 
-    List<Item> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndAvailableTrue(String name, String description);
+    Page<Item> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndAvailableTrue(String name, String description, Pageable pageable);
+
+    List<Item> findByRequest(Long request);
 
 }
