@@ -6,6 +6,7 @@ import ru.practicum.shareit.booking.mapper.BookingMapper;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingDbRepository;
 import ru.practicum.shareit.comment.mapper.CommentMapper;
+import ru.practicum.shareit.comment.model.Comment;
 import ru.practicum.shareit.comment.repository.CommentRepository;
 import ru.practicum.shareit.exception.model.ForbiddenException;
 import ru.practicum.shareit.exception.model.NotFoundException;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -71,6 +73,7 @@ public class ItemServiceImpl implements ItemService {
         List<ItemResponse> responses = new ArrayList<>();
         List<Booking> bookingsLast = bookingRepository.findByItemOwnerAndEndBefore(owner, LocalDateTime.now());
         List<Booking> bookingsNext = bookingRepository.findByItemOwnerAndStartAfter(owner, LocalDateTime.now());
+        List<Comment> comments = commentRepository.findByItemOwner(owner);
         for (Item item : itemRepository.findByOwner(owner)) {
             ItemResponse itemResponse = ItemMapper.fromItemToResponse(item);
             itemResponse.setLastBooking(BookingMapper.fromBookingToShortResponse(
@@ -79,7 +82,9 @@ public class ItemServiceImpl implements ItemService {
             itemResponse.setNextBooking(BookingMapper.fromBookingToShortResponse(
                     bookingsNext.stream().filter(booking -> booking.getItem().equals(item)).findFirst().orElse(null)
             ));
-            itemResponse.setComments(CommentMapper.fromCommentsToResponses(commentRepository.findByItem(item)));
+            itemResponse.setComments(CommentMapper.fromCommentsToResponses(
+                    comments.stream().filter(comment -> comment.getItem().equals(item)).collect(Collectors.toList()))
+            );
             responses.add(itemResponse);
         }
 
