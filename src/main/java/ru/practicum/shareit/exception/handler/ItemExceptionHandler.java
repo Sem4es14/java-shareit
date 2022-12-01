@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import ru.practicum.shareit.exception.dto.ExceptionDTO;
-import ru.practicum.shareit.exception.model.AlreadyExistsException;
 import ru.practicum.shareit.exception.model.ForbiddenException;
 import ru.practicum.shareit.exception.model.NotFoundException;
 import ru.practicum.shareit.exception.model.ValidationException;
@@ -29,12 +28,6 @@ public class ItemExceptionHandler {
     public ResponseEntity<ExceptionDTO> forbiddenException(ForbiddenException e) {
         return new ResponseEntity<>(new ExceptionDTO(e.getMessage(), LocalDateTime.now()),
                 HttpStatus.FORBIDDEN);
-    }
-
-    @ExceptionHandler(value = AlreadyExistsException.class)
-    public ResponseEntity<ExceptionDTO> alreadyExistsException(AlreadyExistsException e) {
-        return new ResponseEntity<>(new ExceptionDTO(e.getMessage(), LocalDateTime.now()),
-                HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(value = MissingRequestHeaderException.class)

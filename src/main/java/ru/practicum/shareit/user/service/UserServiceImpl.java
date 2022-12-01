@@ -2,7 +2,6 @@ package ru.practicum.shareit.user.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.practicum.shareit.exception.model.AlreadyExistsException;
 import ru.practicum.shareit.exception.model.NotFoundException;
 import ru.practicum.shareit.user.dto.requestDto.UserCreateRequest;
 import ru.practicum.shareit.user.dto.requestDto.UserUpdateRequest;
@@ -30,9 +29,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse update(UserUpdateRequest request, Long id) {
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new AlreadyExistsException("User with email: " + request.getEmail() + " is already exists");
-        }
         User user = userRepository.findById(id).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + id + " is not found");
         });

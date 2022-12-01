@@ -33,7 +33,7 @@ public class ItemRequest {
     @JoinColumn(name = "requester_id")
     private User requester;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "request_id")
     private List<Item> items;
 }
