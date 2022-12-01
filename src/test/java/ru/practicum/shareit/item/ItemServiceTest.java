@@ -28,12 +28,11 @@ public class ItemServiceTest {
     private ItemCreateRequest itemCreateRequest;
     private ItemUpdateRequest itemUpdateRequest;
     private ItemResponse itemResponse;
-    private UserCreateRequest userCreateRequest;
     private Long userId;
 
     @BeforeEach
     public void beforeEach() {
-        userCreateRequest = new UserCreateRequest("ivan", "vanish@mail.com");
+        UserCreateRequest userCreateRequest = new UserCreateRequest("ivan", "vanish@mail.com");
         userId = userService.create(userCreateRequest).getId();
         itemCreateRequest = new ItemCreateRequest("book", "beautiful book", true, null);
         itemResponse = itemService.create(itemCreateRequest, userId);
@@ -75,18 +74,18 @@ public class ItemServiceTest {
     @Test
     public void createFailRequest() {
         itemCreateRequest.setRequestId(99L);
-        assertThrows(NotFoundException .class, () -> itemService.create(itemCreateRequest, userId));
+        assertThrows(NotFoundException.class, () -> itemService.create(itemCreateRequest, userId));
     }
 
     @Test
     public void createFailOwner() {
-        assertThrows(NotFoundException .class, () -> itemService.create(itemCreateRequest, 99L));
+        assertThrows(NotFoundException.class, () -> itemService.create(itemCreateRequest, 99L));
     }
 
     @Test
     public void updateFailItem() {
         itemUpdateRequest = new ItemUpdateRequest("knife", null, null);
-        assertThrows(NotFoundException .class, () -> itemService.update(itemUpdateRequest, 99L, userId));
+        assertThrows(NotFoundException.class, () -> itemService.update(itemUpdateRequest, 99L, userId));
     }
 
     @Test

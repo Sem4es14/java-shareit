@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.practicum.shareit.exception.model.NotFoundException;
-import ru.practicum.shareit.item.dto.requestDto.ItemCreateRequest;
-import ru.practicum.shareit.item.service.ItemService;
 import ru.practicum.shareit.request.dto.requestDto.ItemRequestCreate;
 import ru.practicum.shareit.request.dto.responseDto.ItemRequestResponse;
 import ru.practicum.shareit.request.service.ItemRequestService;
@@ -26,19 +24,17 @@ public class RequestServiceTest {
     private final ItemRequestService itemRequestService;
     @Autowired
     private final UserService userService;
-    private ItemRequestCreate itemRequestCreate;
     private UserResponse userResponse;
-    private UserCreateRequest userCreateRequest;
     private ItemRequestResponse requestResponse;
     private Long userId;
 
     @BeforeEach
     private void beforeEach() {
-        userCreateRequest = new UserCreateRequest("ivan", "mailing@mail.com");
+        UserCreateRequest userCreateRequest = new UserCreateRequest("ivan", "mailing@mail.com");
         userResponse = userService.create(userCreateRequest);
         userCreateRequest.setEmail("maill@mail.com");
         userId = userService.create(userCreateRequest).getId();
-        itemRequestCreate = new ItemRequestCreate("i need a book");
+        ItemRequestCreate itemRequestCreate = new ItemRequestCreate("i need a book");
         requestResponse = itemRequestService.createRequest(itemRequestCreate, userResponse.getId());
     }
 
