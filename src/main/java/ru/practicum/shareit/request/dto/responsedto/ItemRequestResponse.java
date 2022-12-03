@@ -1,21 +1,21 @@
-package ru.practicum.shareit.comment.dto.responseDto;
+package ru.practicum.shareit.request.dto.responsedto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.shareit.item.model.Item;
+import ru.practicum.shareit.item.dto.responsedto.ItemResponse;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentResponse {
+public class ItemRequestResponse {
     private Long id;
-    private String text;
-    private Item item;
-    private String authorName;
+    private String description;
     private LocalDateTime created;
+    private List<ItemResponse> items;
 }

@@ -3,9 +3,9 @@ package ru.practicum.shareit.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.user.dto.requestDto.UserCreateRequest;
-import ru.practicum.shareit.user.dto.requestDto.UserUpdateRequest;
-import ru.practicum.shareit.user.dto.responseDto.UserResponse;
+import ru.practicum.shareit.user.dto.requestdto.UserCreateRequest;
+import ru.practicum.shareit.user.dto.requestdto.UserUpdateRequest;
+import ru.practicum.shareit.user.dto.responsedto.UserResponse;
 import ru.practicum.shareit.user.service.UserService;
 
 import javax.validation.Valid;

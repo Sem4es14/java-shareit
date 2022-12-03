@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking.dto.requestDto;
+package ru.practicum.shareit.booking.dto.requestdto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

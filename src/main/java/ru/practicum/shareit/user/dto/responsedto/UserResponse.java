@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking.dto.responseDto;
+package ru.practicum.shareit.user.dto.responsedto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class BookingShortResponse {
+@NoArgsConstructor
+public class UserResponse {
     private Long id;
-    private Long bookerId;
+    private String name;
+    private String email;
 }

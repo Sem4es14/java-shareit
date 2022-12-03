@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.booking.dto.requestDto.BookingCreateRequest;
-import ru.practicum.shareit.booking.dto.responseDto.BookingResponse;
+import ru.practicum.shareit.booking.dto.requestdto.BookingCreateRequest;
+import ru.practicum.shareit.booking.dto.responsedto.BookingResponse;
 import ru.practicum.shareit.booking.model.BookingState;
 import ru.practicum.shareit.booking.service.BookingService;
 

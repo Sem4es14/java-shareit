@@ -1,8 +1,8 @@
 package ru.practicum.shareit.user.service;
 
-import ru.practicum.shareit.user.dto.requestDto.UserCreateRequest;
-import ru.practicum.shareit.user.dto.requestDto.UserUpdateRequest;
-import ru.practicum.shareit.user.dto.responseDto.UserResponse;
+import ru.practicum.shareit.user.dto.requestdto.UserCreateRequest;
+import ru.practicum.shareit.user.dto.requestdto.UserUpdateRequest;
+import ru.practicum.shareit.user.dto.responsedto.UserResponse;
 
 import java.util.List;
 

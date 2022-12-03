@@ -1,11 +1,11 @@
-package ru.practicum.shareit.item.dto.responseDto;
+package ru.practicum.shareit.item.dto.responsedto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.shareit.booking.dto.responseDto.BookingShortResponse;
-import ru.practicum.shareit.comment.dto.responseDto.CommentResponse;
+import ru.practicum.shareit.booking.dto.responsedto.BookingShortResponse;
+import ru.practicum.shareit.comment.dto.responsedto.CommentResponse;
 import ru.practicum.shareit.user.model.User;
 
 import java.util.List;

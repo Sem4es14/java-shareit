@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.practicum.shareit.exception.model.NotFoundException;
-import ru.practicum.shareit.user.dto.requestDto.UserCreateRequest;
-import ru.practicum.shareit.user.dto.requestDto.UserUpdateRequest;
-import ru.practicum.shareit.user.dto.responseDto.UserResponse;
+import ru.practicum.shareit.user.dto.requestdto.UserCreateRequest;
+import ru.practicum.shareit.user.dto.requestdto.UserUpdateRequest;
+import ru.practicum.shareit.user.dto.responsedto.UserResponse;
 import ru.practicum.shareit.user.service.UserService;
 
 import static org.junit.jupiter.api.Assertions.*;

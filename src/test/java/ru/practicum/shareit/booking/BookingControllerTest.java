@@ -14,9 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.shareit.booking.controller.BookingController;
-import ru.practicum.shareit.booking.dto.requestDto.BookingCreateRequest;
-import ru.practicum.shareit.booking.dto.requestDto.BookingUpdateRequest;
-import ru.practicum.shareit.booking.dto.responseDto.BookingResponse;
+import ru.practicum.shareit.booking.dto.requestdto.BookingCreateRequest;
+import ru.practicum.shareit.booking.dto.requestdto.BookingUpdateRequest;
+import ru.practicum.shareit.booking.dto.responsedto.BookingResponse;
 import ru.practicum.shareit.booking.service.BookingService;
 import ru.practicum.shareit.user.model.User;
 

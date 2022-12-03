@@ -13,8 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.shareit.user.controller.UserController;
-import ru.practicum.shareit.user.dto.requestDto.UserCreateRequest;
-import ru.practicum.shareit.user.dto.responseDto.UserResponse;
+import ru.practicum.shareit.user.dto.requestdto.UserCreateRequest;
+import ru.practicum.shareit.user.dto.responsedto.UserResponse;
 import ru.practicum.shareit.user.service.UserServiceImpl;
 
 import java.nio.charset.StandardCharsets;

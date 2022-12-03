@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking.dto.requestDto;
+package ru.practicum.shareit.booking.dto.responsedto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingUpdateRequest {
-    private Boolean available;
+public class BookingShortResponse {
+    private Long id;
+    private Long bookerId;
 }

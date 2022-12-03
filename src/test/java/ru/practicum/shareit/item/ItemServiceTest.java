@@ -8,11 +8,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.practicum.shareit.exception.model.ForbiddenException;
 import ru.practicum.shareit.exception.model.NotFoundException;
-import ru.practicum.shareit.item.dto.requestDto.ItemCreateRequest;
-import ru.practicum.shareit.item.dto.requestDto.ItemUpdateRequest;
-import ru.practicum.shareit.item.dto.responseDto.ItemResponse;
+import ru.practicum.shareit.item.dto.requestdto.ItemCreateRequest;
+import ru.practicum.shareit.item.dto.requestdto.ItemUpdateRequest;
+import ru.practicum.shareit.item.dto.responsedto.ItemResponse;
 import ru.practicum.shareit.item.service.ItemService;
-import ru.practicum.shareit.user.dto.requestDto.UserCreateRequest;
+import ru.practicum.shareit.user.dto.requestdto.UserCreateRequest;
 import ru.practicum.shareit.user.service.UserService;
 
 import static org.junit.jupiter.api.Assertions.*;

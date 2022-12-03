@@ -1,16 +1,16 @@
-package ru.practicum.shareit.user.dto.responseDto;
+package ru.practicum.shareit.user.dto.requestdto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
-    private Long id;
+public class UserUpdateRequest {
     private String name;
+    @Email
     private String email;
 }
