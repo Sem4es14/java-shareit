@@ -1,7 +1,7 @@
 package ru.practicum.shareit.booking.mapper;
 
-import ru.practicum.shareit.booking.dto.responseDto.BookingResponse;
-import ru.practicum.shareit.booking.dto.responseDto.BookingShortResponse;
+import ru.practicum.shareit.booking.dto.responsedto.BookingResponse;
+import ru.practicum.shareit.booking.dto.responsedto.BookingShortResponse;
 import ru.practicum.shareit.booking.model.Booking;
 
 import java.util.List;

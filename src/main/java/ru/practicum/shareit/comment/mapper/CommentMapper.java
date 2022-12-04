@@ -1,6 +1,6 @@
 package ru.practicum.shareit.comment.mapper;
 
-import ru.practicum.shareit.comment.dto.responseDto.CommentResponse;
+import ru.practicum.shareit.comment.dto.responsedto.CommentResponse;
 import ru.practicum.shareit.comment.model.Comment;
 
 import java.util.List;

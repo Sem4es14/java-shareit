@@ -1,6 +1,6 @@
 package ru.practicum.shareit.item.mapper;
 
-import ru.practicum.shareit.item.dto.responseDto.ItemResponse;
+import ru.practicum.shareit.item.dto.responsedto.ItemResponse;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public class ItemMapper {
         return ItemResponse.builder()
                 .id(item.getId())
                 .name(item.getName())
-                .request(item.getRequest())
+                .requestId(item.getRequest())
                 .available(item.getAvailable())
                 .description(item.getDescription())
                 .owner(item.getOwner())

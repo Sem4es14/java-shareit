@@ -1,9 +1,11 @@
 package ru.practicum.shareit.booking.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.practicum.shareit.booking.dto.requestDto.BookingCreateRequest;
-import ru.practicum.shareit.booking.dto.responseDto.BookingResponse;
+import ru.practicum.shareit.booking.dto.requestdto.BookingCreateRequest;
+import ru.practicum.shareit.booking.dto.responsedto.BookingResponse;
 import ru.practicum.shareit.booking.mapper.BookingMapper;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.model.BookingState;
@@ -81,34 +83,35 @@ public class BookingService {
         return BookingMapper.fromBookingToResponse(booking);
     }
 
-    public List<BookingResponse> getBookingsByBooker(Long bookerId, BookingState state) {
+    public List<BookingResponse> getBookingsByBooker(Long bookerId, BookingState state, Long from, Integer size) {
+        Pageable pageable = PageRequest.of((int) (from / size), size);
         User booker = userRepository.findById(bookerId).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + bookerId + " is not found.");
         });
 
         switch (state) {
             case ALL: {
-                return BookingMapper.fromBookingsToResponses(bookingRepository.findByBookerOrderByStartDesc(booker));
+                return BookingMapper.fromBookingsToResponses(bookingRepository.findByBookerOrderByStartDesc(booker, pageable).getContent());
             }
             case CURRENT: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByBookerCurrent(booker));
+                        .findByBookerCurrent(booker, pageable).getContent());
             }
             case PAST: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByBookerPast(booker));
+                        .findByBookerPast(booker, pageable).getContent());
             }
             case FUTURE: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByBookerFuture(booker));
+                        .findByBookerFuture(booker, pageable).getContent());
             }
             case WAITING: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByBookerStatus(booker, BookingStatus.WAITING));
+                        .findByBookerStatus(booker, BookingStatus.WAITING, pageable).getContent());
             }
             case REJECTED: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByBookerStatus(booker, BookingStatus.REJECTED));
+                        .findByBookerStatus(booker, BookingStatus.REJECTED, pageable).getContent());
             }
 
             default:
@@ -116,34 +119,35 @@ public class BookingService {
         }
     }
 
-    public List<BookingResponse> getBookingByOwner(Long ownerId, BookingState state) {
+    public List<BookingResponse> getBookingByOwner(Long ownerId, BookingState state, Long from, Integer size) {
         User owner = userRepository.findById(ownerId).orElseThrow(() -> {
             throw new NotFoundException("User with id: " + ownerId + " is not found.");
         });
+        Pageable pageable = PageRequest.of((int) (from / size), size);
 
         switch (state) {
             case ALL: {
-                return BookingMapper.fromBookingsToResponses(bookingRepository.findByItemOwnerOrderByStartDesc(owner));
+                return BookingMapper.fromBookingsToResponses(bookingRepository.findByItemOwnerOrderByStartDesc(owner, pageable).getContent());
             }
             case CURRENT: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByItemOwnerCurrent(owner));
+                        .findByItemOwnerCurrent(owner, pageable).getContent());
             }
             case PAST: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByItemOwnerPast(owner));
+                        .findByItemOwnerPast(owner, pageable).getContent());
             }
             case FUTURE: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByItemOwnerFuture(owner));
+                        .findByItemOwnerFuture(owner, pageable).getContent());
             }
             case WAITING: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByItemOwnerStatus(owner, BookingStatus.WAITING));
+                        .findByItemOwnerStatus(owner, BookingStatus.WAITING, pageable).getContent());
             }
             case REJECTED: {
                 return BookingMapper.fromBookingsToResponses(bookingRepository
-                        .findByItemOwnerStatus(owner, BookingStatus.REJECTED));
+                        .findByItemOwnerStatus(owner, BookingStatus.REJECTED, pageable).getContent());
             }
             default:
                 throw new NotFoundException("State: " + state + " is not found.");
