@@ -116,7 +116,7 @@ public class ItemServiceImpl implements ItemService {
             ));
         }
         itemResponse.setComments(CommentMapper.fromCommentsToResponses(commentRepository.findByItem(item)));
-        ;
+
         return itemResponse;
     }
 
